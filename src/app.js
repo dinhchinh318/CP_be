@@ -47,7 +47,7 @@ app.use(cors({
     const allowedOrigins = [
       'http://localhost:3000',
       'http://localhost:5173',
-      process.env.FRONTEND_URL
+      'https://cp-fe-psi.vercel.app'
     ].filter(Boolean);
     
     // Cho phép requests không có origin (mobile apps, Postman, etc.)
