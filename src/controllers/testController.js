@@ -1,33 +1,6 @@
 const Result = require("../models/Result");
 const Question = require("../models/Question");
 
-// exports.submitTest = async (req, res) => {
-//   try {
-//     const { userId, answers } = req.body;
-
-//     let score = { R: 0, I: 0, A: 0, S: 0, E: 0, C: 0 };
-
-//     for (const ans of answers) {
-//       const question = await Question.findById(ans.questionId);
-//       if (question) score[question.category] += ans.score;
-//     }
-
-//     const sorted = Object.keys(score).sort((a, b) => score[b] - score[a]);
-//     const riasecCode = sorted.slice(0, 3).join("");
-
-//     const result = await Result.create({
-//       userId,
-//       riasecCode,
-//       details: score,
-//     });
-
-//     // ✅ Trả về data bao gồm _id
-//     res.json({ message: "Result saved!", result });
-//   } catch (err) {
-//     res.status(500).json({ error: err.message });
-//   }
-// };
-
 exports.submitTest = async (req, res) => {
   try {
     const { userId, answers } = req.body;
@@ -40,7 +13,7 @@ exports.submitTest = async (req, res) => {
       if (question) score[question.category] += ans.score;
     }
 
-    // ✅ Convert sang % (giả sử mỗi category max = 50 điểm)
+    // Convert sang % (giả sử mỗi category max = 50 điểm)
     const totalQuestions = answers.length / 6; // 6 categories
     const maxScore = totalQuestions * 5; // Giả sử mỗi câu max 5 điểm
 
@@ -59,7 +32,7 @@ exports.submitTest = async (req, res) => {
     const result = await Result.create({
       userId,
       riasecCode,
-      details: scorePercent, // ✅ Lưu dạng %
+      details: scorePercent,
     });
 
     res.json({ message: "Result saved!", result });
@@ -78,7 +51,7 @@ exports.getResultById = async (req, res) => {
       R: 0, I: 0, A: 0, S: 0, E: 0, C: 0
     };
 
-    // ✅ Trả về trực tiếp result thôi
+    // Trả về trực tiếp result thôi
     res.json(result);
   } catch (err) {
     res.status(500).json({ message: err.message });

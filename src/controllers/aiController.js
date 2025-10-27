@@ -18,7 +18,7 @@ export const askAI = async (req, res) => {
     const text = result.response.text();
     res.json({ reply: text });
   } catch (error) {
-    console.error("❌ Gemini error:", error);
+    console.error(" Gemini error:", error);
     res.status(500).json({ error: error.message });
   }
 };
