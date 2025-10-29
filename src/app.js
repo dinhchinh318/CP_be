@@ -56,6 +56,9 @@ app.use("/careers", careerRoutes);
 const aiRoutes = require("./routes/aiRoutes.js");
 app.use("/api/ai", aiRoutes);
 
+const resultRoutes = require("./routes/resultRoutes.js");
+app.use("/api/result", resultRoutes);
+
 app.use((req, res) => {
   res.status(404).json({ error: 'Route not found' });
 });
